@@ -13,7 +13,8 @@ export const registerUser = async (userData: FieldValues) => {
       },
       body: JSON.stringify(userData),
     });
-    return res;
+     
+    return res.json();
   } catch (error: any) {
     return console.log(error);
   }
@@ -35,7 +36,7 @@ export const loginUser = async (userData: FieldValues) => {
     if (result?.success) {
       cookiesStore.set("authToken", result?.data.token);
     }
-    return {...result, "success": true};
+    return { ...result, success: true };
   } catch (error: any) {
     return Error(error);
   }

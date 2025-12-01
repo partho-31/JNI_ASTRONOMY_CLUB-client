@@ -132,7 +132,7 @@ const Navbar = () => {
               <span className="hidden sm:inline"> LogIn</span>
             </button>
           </Link>
-          <Link href={"/registration"}>
+          <Link href={"/register"}>
             <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
               < UserRoundPlus size={20} />
               <span className="hidden sm:inline"> SignUp</span>

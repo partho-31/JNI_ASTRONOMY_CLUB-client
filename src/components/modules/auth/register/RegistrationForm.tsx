@@ -15,6 +15,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { RegistrationSchema } from "./RegistrationValidation";
 import { registerUser } from "@/services/authServices";
 import { toast } from "sonner";
+import { Response } from "@/types/response";
 
 const RegistrationForm = () => {
   const form = useForm({
@@ -28,7 +29,7 @@ const RegistrationForm = () => {
 
   const OnSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await registerUser(data)
+      const res : Response = await registerUser(data)
       if (res?.success){
           toast.success(res?.message)
       }else {

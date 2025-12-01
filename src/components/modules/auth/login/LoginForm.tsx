@@ -15,17 +15,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { LoginSchema } from "./LoginValidation";
+import { Response } from "@/types/response";
 
 const LoginForm = () => {
   const form = useForm({
     resolver: zodResolver(LoginSchema),
   });
 
+ 
+
   const {formState: { isSubmitting }} = form
 
   const OnSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await loginUser(data)
+      const res : Response = await loginUser(data)
       if (res?.success){
           toast.success("Login successful")
       }else {
