@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata : Metadata = {
+  title : "JNIAC JUST | About Us",
+}
+
 const AboutSection = () => {
   return (
     <div  className="py-30 bg-slate-950  overflow-hidden">

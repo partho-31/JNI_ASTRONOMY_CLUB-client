@@ -1,4 +1,5 @@
 import { Member } from "@/types/member";
+import Image from "next/image";
 
 const Card = ({user} : {user : Member}) => {
   
@@ -6,16 +7,17 @@ const Card = ({user} : {user : Member}) => {
     <div className="max-w-sm mx-auto bg-slate-900/90 text-white rounded-3xl shadow-xl p-6 backdrop-blur border border-slate-700">
       {/* Image */}
       <div className="w-full h-48 rounded-2xl overflow-hidden shadow-md">
-        <img
-          src={user?.image}
-          alt={user?.name}
-          className="w-full h-full object-cover"
+        <Image
+          src={`https://res.cloudinary.com/jniac-just/${user?.image}`}
+          alt={user?.first_name}
+          fill
+          className="object-cover"
         />
       </div>
 
       {/* Name + Role */}
       <div className="mt-4 text-center">
-        <h2 className="text-2xl font-bold tracking-wide">{user.name}</h2>
+        <h2 className="text-2xl font-bold tracking-wide">{user.first_name} {user.last_name}</h2>
         <p className="text-indigo-300 text-sm">
           {user?.role} — Astronomy Club
         </p>

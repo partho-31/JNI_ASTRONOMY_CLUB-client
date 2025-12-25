@@ -4,6 +4,9 @@
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
+
+
+
 export const registerUser = async (userData: FieldValues) => {
   try {
     const res = await fetch("https://edu-point31.vercel.app/auth/users/", {
@@ -46,3 +49,18 @@ export const currentUser = async () => {
   const token = (await cookies()).get("authToken");
   return token;
 };
+
+
+export const magazines = async ()  => {
+  try {
+    const response = await fetch(
+    "https://jni-astronomy-club.vercel.app/api/magazines",
+    {
+      cache: "no-cache",
+    }
+  );
+   return response.json()
+  } catch (error : any) {
+    return Error(error);
+  }
+}

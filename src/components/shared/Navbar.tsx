@@ -1,8 +1,19 @@
+"use client"
+
 import Link from "next/link";
-// import { ModeToggle } from "../ui/modeToggle";
-import { LogIn, UserRoundPlus } from "lucide-react"
+import { LogIn, UserRoundPlus} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useState } from "react";
+
 
 const Navbar = () => {
+
+  const [open, setOpen] = useState(false);
   return (
     <div className="navbar fixed top-0 z-50 bg-transparent backdrop-blur-md bg-opacity-20 border-b border-white/10 p-3">
       <div className="navbar-start">
@@ -31,8 +42,11 @@ const Navbar = () => {
             tabIndex={-1}
             className="menu menu-sm dropdown-content bg-base-100/95 backdrop-blur-lg rounded-box z-1 mt-3 w-52 p-2 shadow-xl border border-white/20"
           >
-             <li>
-              <Link href={"/"} className="text-white hover:bg-white/10 hover:text-white">
+            <li>
+              <Link
+                href={"/"}
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
                 Home
               </Link>
             </li>
@@ -42,7 +56,10 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <Link href={'/articles'} className="text-white hover:bg-white/10 hover:text-white">
+              <Link
+                href={"/articles"}
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
                 Articles
               </Link>
             </li>
@@ -65,7 +82,6 @@ const Navbar = () => {
                 Contact Us
               </a>
             </li>
-            
           </ul>
         </div>
         <a className="text-white text-xl font-bold ml-2 tracking-wider bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text">
@@ -77,70 +93,113 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-0">
           <li>
-            <Link href="/" className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group">
+            <Link
+              href="/"
+              className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group"
+            >
               <span className="group-hover:scale-110 transition-transform">
                 Home
               </span>
             </Link>
           </li>
+          {/* <li>
+            <Link
+              href="/events"
+              className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group"
+            >
+              <span className="group-hover:scale-110 transition-transform">
+                Events
+              </span>
+            </Link>
+          </li> */}
           <li>
-            <Link href={"/magazines"} className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group">
+            <Link
+              href={"/magazines"}
+              className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group"
+            >
               <span className="group-hover:scale-110 transition-transform">
                 Magazines
               </span>
             </Link>
           </li>
           <li>
-            <Link href={"/articles"} className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group">
+            <Link
+              href={"/articles"}
+              className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group"
+            >
               <span className="group-hover:scale-110 transition-transform">
                 Articles
               </span>
             </Link>
           </li>
           <li>
-            <Link  href={"/members"} className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group">
-              <span className="group-hover:scale-110 transition-transform">
-                Our Researchers
-              </span>
-            </Link>
-          </li>
-          <li>
             <Link
-              href={"/about"}
+              href={"/members"}
               className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group"
             >
               <span className="group-hover:scale-110 transition-transform">
-                About Us
+                Our Team
               </span>
             </Link>
           </li>
-          <li>
-            <Link href={"/contact"} className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group">
-              <span className="group-hover:scale-110 transition-transform">
-                Contact Us
-              </span>
-            </Link>
+          <li className="static">
+            <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
+              <DropdownMenuTrigger asChild>
+                <span
+                  onMouseEnter={() => setOpen(true)}
+                  onMouseLeave={() => setOpen(false)}
+                  className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group inline-flex items-center px-3 cursor-pointer"
+                >
+                  <span className="group-hover:scale-110 transition-transform">
+                    Services
+                  </span>
+                </span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                onMouseEnter={() => setOpen(true)}
+                onMouseLeave={() => setOpen(false)}
+                align="center"
+                sideOffset={8}
+                className="bg-base-100/95 backdrop-blur-lg border border-white/20 min-w-[180px] z-[60]"
+              >
+                <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer focus:bg-white/10 focus:text-white">
+                  Privacy & Policy
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer p-0 focus:bg-white/10 focus:text-white">
+                  <Link
+                    href={"/about"}
+                    className="w-full px-2 py-1.5 block"
+                  >
+                    About Us
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer p-0 focus:bg-white/10 focus:text-white">
+                  <Link
+                    href={"/contact"}
+                    className="w-full px-2 py-1.5 block"
+                  >
+                    Contact Us
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </li>
         </ul>
       </div>
 
-      
-        <div className="navbar-end  space-x-0">
-          <Link href={"/login"}>
-            <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10  hover:text-white transition duration-200">
-              <LogIn size={20}/>
-              <span className="hidden sm:inline"> LogIn</span>
-            </button>
-          </Link>
-          <Link href={"/register"}>
-            <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
-              < UserRoundPlus size={20} />
-              <span className="hidden sm:inline"> SignUp</span>
-            </button>
-          </Link> 
-        {/* <div className="mx-2">
-          <ModeToggle/>
-        </div> */}
+      <div className="navbar-end space-x-0">
+        <Link href={"/login"}>
+          <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
+            <LogIn size={20} />
+            <span className="hidden sm:inline">LogIn</span>
+          </button>
+        </Link>
+        <Link href={"/register"}>
+          <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
+            <UserRoundPlus size={20} />
+            <span className="hidden sm:inline">SignUp</span>
+          </button>
+        </Link>
       </div>
     </div>
   );

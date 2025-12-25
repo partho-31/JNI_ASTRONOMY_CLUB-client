@@ -5,18 +5,19 @@ import { useState } from "react";
 
 export default function ProfilePage() {
   const [member, setMember] = useState<Member>({
-    name: "Sarah Chen",
-    email: "sarah.chen@university.edu",
-    address: "123 Astronomy Drive, Cosmic City, CC 12345",
-    phone_number: "+1 (555) 123-4567",
-    role: "Senior Astrophysicist",
-    institute: "International Space Research Institute",
-    profession: "Astrophysicist & Researcher",
-    bio: "Passionate about exoplanet research and stellar evolution. Leads research on habitable zone planets orbiting M-dwarf stars.",
-    qualifications:
-      "PhD in Astrophysics\nMSc in Astronomy\nBSc in Physics\nNASA Research Fellowship\nInternational Astronomy Union Member",
-    experience: "8 years in exoplanet research",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
+    id: "2",
+    first_name: "Nusrat",
+    last_name: "Jahan",
+    email: "nusrat.jahan@example.com",
+    address: "Dhaka, Bangladesh",
+    phone_number: "+8801700000002",
+    role: "General Secretary",
+    institute: "University of Dhaka",
+    profession: "Research Assistant",
+    bio: "Actively involved in organizing seminars, webinars, and scientific publications.",
+    qualifications: "MSc in Physics",
+    experience: "3 years of experience in academic research and event coordination.",
+    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -36,12 +37,12 @@ export default function ProfilePage() {
               height={100}
               width={100}
               src={member.image}
-              alt={member.name}
+              alt={member.first_name}
               className="w-full h-full object-cover"
             />
           </div>
 
-          <h1 className="text-3xl font-bold mt-4">{member.name}</h1>
+          <h1 className="text-3xl font-bold mt-4">{member.first_name} {member.last_name}</h1>
           <p className="text-indigo-300">{member.role} — Astronomy Club</p>
 
           <button

@@ -1,4 +1,4 @@
-import { Users, Home, UserRoundPen , Newspaper, Layers2, Bell } from "lucide-react";
+import { Users, Home,  LayoutDashboard, UserRoundPen , Newspaper, Layers2, Bell } from "lucide-react";
 
 import {
   Sidebar,
@@ -17,6 +17,11 @@ const items = [
     title: "Home",
     url: "/",
     icon: Home,
+  },
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: LayoutDashboard,
   },
   {
     title: "Profile",
@@ -59,11 +64,11 @@ export function AppSidebar() {
               </div>
             </div>
           </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
+          <SidebarGroupContent >
+            <SidebarMenu className="my-4">
              {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton className="px-3 py-5 hover:bg-cyan-600 rounded-lg text-white font-medium transition-colors" asChild>
+                  <SidebarMenuButton className="px-3 py-5 mb-0.5 hover:bg-cyan-600 rounded-lg text-white font-medium transition-colors" asChild>
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

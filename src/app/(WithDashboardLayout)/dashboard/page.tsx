@@ -1,3 +1,11 @@
+import { ChartAreaLinear } from "@/components/ui/area-chart";
+import { ChartBarMultiple } from "@/components/ui/bar-chart";
+import { Metadata } from "next";
+
+export const metadata : Metadata = {
+  title : "Dashboard",
+}
+
 const AdminDashboard = () => {
   return (
     <div className="flex lg:pt-0 pt-10 bg-slate-900 text-white">
@@ -61,13 +69,14 @@ const AdminDashboard = () => {
 
         {/* Charts and Analytics */}
         <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Traffic Chart */}
+          {/* Line Chart */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
-           
+           <ChartAreaLinear />
           </div>
 
-          {/* Content Distribution */}
+          {/* Bar Chart */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
+            <ChartBarMultiple />
            </div>
         </div>
 

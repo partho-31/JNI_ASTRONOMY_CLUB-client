@@ -1,13 +1,15 @@
 export interface Member {
-  name: string;
+  id: string;
+  first_name: string;
+  last_name: string;
   email: string;
   address: string;
   phone_number: string;
-  role: string;                
+  role: string;
   institute: string;
   profession: string;
   bio: string;
-  qualifications: string;      
+  qualifications: string;
   experience: string;
-  image: string;             
-};
+  image: string;
+}

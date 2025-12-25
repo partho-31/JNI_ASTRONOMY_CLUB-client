@@ -1,25 +1,63 @@
+"use-client"
+import { Article } from "@/types/article";
+import Image from "next/image";
 
-const ArticleCard = () => {
+const ArticleCard = ({ article }: { article: Article }) => {
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16">
-      <h3 className="text-2xl font-semibold mb-8">📝 Latest Articles</h3>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div
-            key={i}
-            className="bg-white/10 border border-white/10 rounded-xl p-4"
-          >
-            <div className="w-full h-36 bg-white/10 rounded-lg"></div>
-            <h4 className="mt-4 font-semibold">Article Title</h4>
-            <p className="text-gray-400 text-sm">
-              Short excerpt of the article goes here...
-            </p>
-            <button className="text-blue-300 mt-2 text-sm">Read More →</button>
-          </div>
-        ))}
+    <div data-aos="fade-up-left" className="group bg-slate-800/30 backdrop-blur-lg rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/10">
+      <div className="relative h-48 overflow-hidden">
+        <Image
+          src={`https://res.cloudinary.com/jniac-just/${article.cover_img}`}
+          fill
+          alt="cover"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent" />
       </div>
-    </section>
+
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-2 text-sm text-gray-400">
+          <div className="flex items-center gap-2">
+            📅 {formatDate(article.created_at)}
+          </div>
+          <span>⏱️ {article.read_time}</span>
+        </div>
+
+        <h3 className="text-lg font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors duration-200">
+          {article.title}
+        </h3>
+
+        <p className="text-gray-300 mb-3 line-clamp-3">{article.discription}</p>
+
+        <div className="flex items-center gap-2 justify-between mt-4">
+          <div className="flex items-center gap-2">
+            <div className="relative w-8 h-8 bg-linear-to-r from-yellow-500 to-orange-500 rounded-full overflow-hidden flex items-center justify-center text-white text-sm font-bold">
+              <Image
+                src={`https://res.cloudinary.com/jniac-just/${article.author.image}`}
+                fill
+                alt="cover"
+                className="object-cover"
+              />
+            </div>
+            <span className="text-gray-400 line-clamp-1 text-sm">
+              {article.author.first_name} {article.author.last_name}{" "}
+            </span>
+          </div>
+          <button
+            className="text-cyan-400 hover:text-cyan-300 font-medium text-sm transition-colors duration-200"
+          >
+            Start Reading →
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

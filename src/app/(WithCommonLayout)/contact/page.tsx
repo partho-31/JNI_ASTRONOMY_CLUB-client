@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata : Metadata = {
+  title : "JNIAC JUST | Contact Us",
+}
+
 const page = () => {
   return (
     <div className="min-h-screen py-30 bg-linear-to-b from-slate-900 to-slate-950 text-white px-6 ">

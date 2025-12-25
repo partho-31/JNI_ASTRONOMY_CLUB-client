@@ -1,3 +1,6 @@
+"use client"
+import { Button } from "@/components/ui/button";
+
 const HeroSection = () => {
   return ( 
     <div className="relative w-full h-screen overflow-hidden">
@@ -11,24 +14,21 @@ const HeroSection = () => {
       ></div>
 
       {/* Background Overly  */}
-      <div className="absolute inset-0 bg-indigo-950/30 z-0"></div>
+      <div className="absolute inset-0 bg-slate-950/60  z-0"></div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+      <div className="relative mt-6 z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
-          Welcome to the Cosmos
+          <span className="text-8xl">T</span>HINK DEEP AND EXPL<span>🪐</span>RE<span className="text-cyan-500">!</span>
         </h1>
 
-        <p className="text-gray-300 text-lg md:text-xl mt-4 max-w-2xl">
-          Explore the mysteries of the universe with celestial animations and
-          deep space visuals.
+        <p className="text-gray-300 text-lg md:text-xl backdrop-blur-sm mt-6 max-w-2xl">
+          Uncover the mysteries of the universe with breathtaking galactic views, immersive exhibits and hands-on space exploration for all ages.
         </p>
 
-        <div className="mt-8">
-          <a className="btn bg-linear-to-r from-cyan-500/20 to-blue-600/20 border-cyan-400/30 text-white hover:bg-cyan-500/30 hover:border-cyan-300/50 hover:scale-105 transition-all duration-300">
-            Explore Universe
-            <span className="ml-2 text-cyan-300">✦</span>
-          </a>
+        <div  className="mt-8">
+          <Button className="bg-transparent text-white border-2 hover:text-black hover:border-0 border-cyan-500">Explore Exhibits</Button>
+         
         </div>
       </div>
     </div>

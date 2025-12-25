@@ -1,4 +1,30 @@
-const Page = () => {
+import { Article } from "@/types/article";
+import Image from "next/image";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ articleId: string }>;
+}) => {
+  const { articleId } = await params;
+  const article = await fetch(
+    `https://jni-astronomy-club.vercel.app/api/articles/${articleId}`
+  ).then((res) => res.json());
+
+  return {
+    title: article.title,
+    description: article.description,
+  };
+};
+
+const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
+  const { articleId } = await params;
+
+  const response = await fetch(
+    `https://jni-astronomy-club.vercel.app/api/articles/${articleId}`
+  );
+  const article: Article = await response.json();
+
   return (
     <div className="min-h-screen py-20 bg-slate-900 text-white">
       {/* Article Header */}
@@ -6,22 +32,19 @@ const Page = () => {
         {/* Article Meta */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="bg-cyan-600 text-cyan-400 px-3 py-1 rounded-full text-sm font-medium">
-              Deep Space Research
+            <span className="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              {article.magazine}
             </span>
             <span className="text-gray-400">•</span>
-            <span className="text-gray-400">15 minutes read</span>
+            <span className="text-gray-400">{article.read_time}</span>
           </div>
 
           <h1 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-            First Deep Field: Galaxies at the Edge of Time and the Revolution of
-            Modern Astronomy
+            {article.title}
           </h1>
 
           <p className="text-xl text-cyan-300 mb-6 leading-relaxed">
-            How the James Webb Space Telescope inaugural deep field image is
-            reshaping our understanding of cosmic dawn and challenging
-            fundamental cosmological models.
+            {article.sub_title}
           </p>
 
           <div className="flex items-center gap-4 pt-4 border-t border-slate-700">
@@ -31,7 +54,7 @@ const Page = () => {
               </div>
               <div>
                 <div className="text-white font-semibold">
-                  Doctor Alex Sterling
+                  {article.author.first_name} {article.author.last_name}
                 </div>
                 <div className="text-gray-400 text-sm">
                   Senior Astrophysicist • December 15, 2024
@@ -47,8 +70,14 @@ const Page = () => {
       </div>
 
       {/* Featured Image */}
-      <div className="container mx-auto px-4 max-w-4xl mb-8">
-        <div className="bg-slate-700 h-64 flex items-center justify-center"></div>
+      <div className="container mx-auto relative px-4 max-w-4xl mb-8">
+        <div className="bg-slate-700  h-64 flex items-center justify-center"></div>
+        <Image
+          src={`https://res.cloudinary.com/jniac-just/${article.cover_img}`}
+          fill
+          alt="cover"
+          className="object-cover"
+        />
         <p className="text-center text-gray-400 text-sm mt-2">
           James Webb Space Telescope first deep field image of galaxy cluster
           SMACS 0723
@@ -60,13 +89,7 @@ const Page = () => {
         <article className="prose prose-invert prose-lg max-w-none">
           {/* Introduction */}
           <p className="text-xl text-gray-300 leading-relaxed mb-6 font-light">
-            In the quiet expanse of space, nearly one million miles from Earth,
-            the James Webb Space Telescope turned its golden eye toward a
-            seemingly empty patch of sky. What it revealed would forever change
-            our understanding of the universe infancy. The first deep field
-            image, released on July 11, 2022, unveiled thousands of
-            galaxies—some dating back to within 400 million years after the Big
-            Bang—in stunning, unprecedented detail.
+            {article.discription}
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-8">
@@ -81,17 +104,11 @@ const Page = () => {
 
           {/* Main Content Sections */}
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
-            The Cosmic Time Machine
+            {article.heading_01}
           </h2>
 
           <p className="text-gray-300 leading-relaxed mb-6">
-            Gravitational lensing, a phenomenon predicted by Einstein theory of
-            general relativity, serves as nature magnifying glass. The massive
-            foreground galaxy cluster SMACS 0723 bends and amplifies light from
-            more distant background galaxies, making visible what would
-            otherwise remain hidden in the darkness of deep space. This cosmic
-            magnification allows the James Webb Space Telescope to peer further
-            back in time than any telescope before it.
+            {article.paragraph_01}
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-6">
@@ -108,29 +125,18 @@ const Page = () => {
             <h3 className="text-xl font-bold text-cyan-400 mb-3">
               Breakthrough Discovery
             </h3>
-            <p className="text-gray-300 italic">
-              We are seeing galaxies that existed when the universe was just two
-              percent of its current age, yet they appear remarkably mature and
-              structured. This suggests either galaxy formation began much
-              earlier than we thought, or our understanding of dark matter needs
-              revision.
-            </p>
+            <p className="text-gray-300 italic">{article.quotes}</p>
             <p className="text-cyan-400 mt-2 font-semibold">
-              — Doctor Alex Sterling, Lead Researcher
+              — {article.quoter}
             </p>
           </div>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
-            Challenging Cosmological Models
+            {article.heading_02}
           </h2>
 
           <p className="text-gray-300 leading-relaxed mb-6">
-            The presence of well-formed, complex galaxies so early in cosmic
-            history presents a significant challenge to the Lambda Cold Dark
-            Matter model, the prevailing theory of cosmic evolution. According
-            to current simulations, there should not have been enough time for
-            such massive, structured galaxies to form within the first 400
-            million years after the Big Bang.
+            {article.paragraph_02}
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-6">
@@ -144,16 +150,11 @@ const Page = () => {
 
           {/* Technical Details */}
           <h3 className="text-2xl font-bold mt-10 mb-4 text-purple-400">
-            Spectroscopic Revelations
+            {article.heading_03}
           </h3>
 
           <p className="text-gray-300 leading-relaxed mb-6">
-            Follow-up observations using James Webb Space Telescope
-            Near-Infrared Spectrograph have provided even more startling
-            revelations. Spectroscopy of these ancient galaxies reveals chemical
-            signatures indicating rapid enrichment with heavy elements—the
-            products of multiple generations of star formation and supernova
-            explosions.
+            {article.paragraph_03}
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-8">

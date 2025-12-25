@@ -1,50 +1,58 @@
 import Card from "@/components/modules/member/Card";
 import { Member } from "@/types/member";
+import { Metadata } from "next";
+
+export const metadata : Metadata = {
+  title : "JNIAC JUST | Our Team",
+}
 
 export default function Page() {
   const members: Member[] = [
     {
-      name: "Sarah Chen",
-      email: "sarah.chen@university.edu",
-      address: "123 Astronomy Drive, Cosmic City, CC 12345",
-      phone_number: "+1 (555) 123-4567",
-      role: "Senior Astrophysicist",
-      institute: "International Space Research Institute",
-      profession: "Astrophysicist & Researcher",
-      bio: "Passionate about exoplanet research and stellar evolution. Leads research on habitable zone planets orbiting M-dwarf stars.",
-      qualifications:
-        "PhD in Astrophysics\nMSc in Astronomy\nBSc in Physics",
-      experience: "8 years in exoplanet research",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
-    },
-    {
-      name: "Dr. Leo Martinez",
-      email: "leo.martinez@astrocenter.org",
-      address: "89 Nebula Street, Orion Valley, OV 98765",
-      phone_number: "+1 (555) 987-6543",
-      role: "Telescope Operations Lead",
-      institute: "Orion Valley Space Observatory",
-      profession: "Observational Astronomer",
-      bio: "Expert in deep-sky imaging and telescope automation. Works on improving long-exposure astrophotography systems.",
-      qualifications:
-        "PhD in Observational Astronomy\nMSc in Space Science\nCertified Telescope Instructor",
-      experience: "5 years in deep-sky imaging research",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
-    },
-    {
-      name: "Ava Thompson",
-      email: "ava.thompson@cosmoslab.com",
-      address: "225 Galaxy Boulevard, Starview, ST 54321",
-      phone_number: "+1 (555) 222-3333",
-      role: "Planetarium Presenter",
-      institute: "Starview Planetarium",
-      profession: "Astronomy Educator",
-      bio: "Dedicated to making astronomy accessible to everyone. Specializes in presenting interactive shows about galaxies and black holes.",
-      qualifications:
-        "MSc in Science Communication\nBSc in Physics\nNational Planetarium Association Member",
-      experience: "4 years in astronomy outreach",
-      image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
-    }
+    id: "1",
+    first_name: "Partho",
+    last_name: "Mondal",
+    email: "partho.mondal@example.com",
+    address: "Jashore, Bangladesh",
+    phone_number: "+8801700000001",
+    role: "President",
+    institute: "Jashore University of Science and Technology",
+    profession: "Physics Student",
+    bio: "An enthusiastic physics undergraduate with a deep interest in astronomy and scientific outreach.",
+    qualifications: "BSc in Physics (Running)",
+    experience: "2+ years of experience in academic clubs and astronomy-related activities.",
+    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
+  },
+  {
+    id: "2",
+    first_name: "Nusrat",
+    last_name: "Jahan",
+    email: "nusrat.jahan@example.com",
+    address: "Dhaka, Bangladesh",
+    phone_number: "+8801700000002",
+    role: "General Secretary",
+    institute: "University of Dhaka",
+    profession: "Research Assistant",
+    bio: "Actively involved in organizing seminars, webinars, and scientific publications.",
+    qualifications: "MSc in Physics",
+    experience: "3 years of experience in academic research and event coordination.",
+    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
+  },
+  {
+    id: "3",
+    first_name: "Rafi",
+    last_name: "Hasan",
+    email: "rafi.hasan@example.com",
+    address: "Khulna, Bangladesh",
+    phone_number: "+8801700000003",
+    role: "Treasurer",
+    institute: "Khulna University",
+    profession: "Lecturer",
+    bio: "Passionate about teaching physics and promoting science among students.",
+    qualifications: "MSc in Applied Physics",
+    experience: "5 years of teaching experience at university level.",
+    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
+  },
   ];
 
   return (
@@ -85,10 +93,11 @@ export default function Page() {
       </div>
 
       {/* Members Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {members?.map((member, index) => (
-        <Card key={index} user={member} />
-      ))}</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
+        {members?.map((member, index) => (
+          <Card key={index} user={member} />
+        ))}
+      </div>
     </div>
   );
 }
