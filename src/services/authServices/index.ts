@@ -3,13 +3,13 @@
 
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
-
+import { baseURL } from "../config/BaseURL";
 
 
 
 export const registerUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch("https://edu-point31.vercel.app/auth/users/", {
+    const res = await fetch(`${baseURL}/auth/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const registerUser = async (userData: FieldValues) => {
 
 export const loginUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch("https://edu-point31.vercel.app/auth/jwt/create/", {
+    const res = await fetch(`${baseURL}/auth/jwt/create/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,17 +50,3 @@ export const currentUser = async () => {
   return token;
 };
 
-
-export const magazines = async ()  => {
-  try {
-    const response = await fetch(
-    "https://jni-astronomy-club.vercel.app/api/magazines",
-    {
-      cache: "no-cache",
-    }
-  );
-   return response.json()
-  } catch (error : any) {
-    return Error(error);
-  }
-}

@@ -4,6 +4,7 @@ import HeroSection from "@/components/modules/home/HeroSection";
 import MagazineCard from "@/components/modules/home/MagazineCard";
 import MemberCard from "@/components/modules/home/MemberCard";
 import WhoWeAre from "@/components/modules/home/WhoWeAre";
+import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import { Magazine } from "@/types/magazine";
 import { Member } from "@/types/member";
@@ -11,21 +12,21 @@ import Link from "next/link";
 
 const HomePage = async () => {
   const response = await fetch(
-    "https://jni-astronomy-club.vercel.app/api/magazines",
+    `${baseURL}/api/magazines`,
     {
       cache: "no-cache",
     }
   );
 
   const response2 = await fetch(
-    "https://jni-astronomy-club.vercel.app/api/articles/",
+    `${baseURL}/api/articles/`,
     {
       cache: "no-cache",
     }
   );
 
   const response3 = await fetch(
-    "https://jni-astronomy-club.vercel.app/api/members/",
+    `${baseURL}/api/members/`,
     {
       cache: "no-cache",
     }

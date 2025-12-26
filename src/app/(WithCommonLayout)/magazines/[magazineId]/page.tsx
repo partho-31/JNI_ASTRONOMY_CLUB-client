@@ -1,3 +1,4 @@
+import { baseURL } from "@/services/config/BaseURL";
 import { Magazine } from "@/types/magazine";
 import Image from "next/image";
 
@@ -7,9 +8,9 @@ export async function generateMetadata({
   params: Promise<{ magazineId: string }>;
 }) {
   const { magazineId } = await params;
-  const magazine = await fetch(
-    `https://jni-astronomy-club.vercel.app/api/magazines/${magazineId}`
-  ).then((res) => res.json());
+  const magazine = await fetch(`${baseURL}/api/magazines/${magazineId}`).then(
+    (res) => res.json()
+  );
 
   return {
     title: magazine.title,
@@ -23,9 +24,7 @@ const SingleMagazinePage = async ({
 }) => {
   const { magazineId } = await params;
 
-  const response = await fetch(
-    `https://jni-astronomy-club.vercel.app/api/magazines/${magazineId}`
-  );
+  const response = await fetch(`${baseURL}/api/magazines/${magazineId}`);
   const magazine: Magazine = await response.json();
 
   return (

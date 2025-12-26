@@ -1,3 +1,4 @@
+import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import Image from "next/image";
 
@@ -6,10 +7,11 @@ export const generateMetadata = async ({
 }: {
   params: Promise<{ articleId: string }>;
 }) => {
+  
   const { articleId } = await params;
-  const article = await fetch(
-    `https://jni-astronomy-club.vercel.app/api/articles/${articleId}`
-  ).then((res) => res.json());
+  const article = await fetch(`${baseURL}/api/articles/${articleId}`).then(
+    (res) => res.json()
+  );
 
   return {
     title: article.title,
@@ -18,11 +20,10 @@ export const generateMetadata = async ({
 };
 
 const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
+  
   const { articleId } = await params;
 
-  const response = await fetch(
-    `https://jni-astronomy-club.vercel.app/api/articles/${articleId}`
-  );
+  const response = await fetch(`${baseURL}/api/articles/${articleId}`);
   const article: Article = await response.json();
 
   return (

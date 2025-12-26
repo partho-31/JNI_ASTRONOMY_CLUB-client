@@ -1,4 +1,5 @@
 import ArticleCard from "@/components/modules/article/ArticleCard";
+import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 const ArticlesPage = async () => {
   const response = await fetch(
-    "https://jni-astronomy-club.vercel.app/api/articles/",
+    `${baseURL}/api/articles/`,
     {
       cache: "no-cache",
     }
