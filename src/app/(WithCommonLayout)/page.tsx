@@ -32,6 +32,7 @@ const HomePage = async () => {
     }
   );
 
+ 
   const members: Member[] = await response3.json();
   const articles: Article[] = await response2.json();
   const magazines: Magazine[] = await response.json();

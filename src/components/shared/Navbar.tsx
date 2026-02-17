@@ -1,17 +1,33 @@
-"use client"
+"use client";
 
 import Link from "next/link";
-import { LogIn, UserRoundPlus} from "lucide-react";
+import { LogIn, UserRoundPlus } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import Image from "next/image";
+import AuthContext from "@/context/AuthContext";
+import { logoutUser } from "@/services/authServices";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { user, setUser } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const response = await logoutUser();
+    if (response.success) {
+      toast.success("Logout successful");
+      setUser(null);
+      router.push("/");
+      router.refresh();
+    }
+  };
 
   const [open, setOpen] = useState(false);
   return (
@@ -160,24 +176,18 @@ const Navbar = () => {
                 onMouseLeave={() => setOpen(false)}
                 align="center"
                 sideOffset={8}
-                className="bg-base-100/95 backdrop-blur-lg border border-white/20 min-w-[180px] z-[60]"
+                className="bg-base-100/95 backdrop-blur-lg border border-white/20 min-w-[180px] z-60"
               >
                 <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer focus:bg-white/10 focus:text-white">
                   Privacy & Policy
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer p-0 focus:bg-white/10 focus:text-white">
-                  <Link
-                    href={"/about"}
-                    className="w-full px-2 py-1.5 block"
-                  >
+                  <Link href={"/about"} className="w-full px-2 py-1.5 block">
                     About Us
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-white/90 hover:bg-white/10 hover:text-white cursor-pointer p-0 focus:bg-white/10 focus:text-white">
-                  <Link
-                    href={"/contact"}
-                    className="w-full px-2 py-1.5 block"
-                  >
+                  <Link href={"/contact"} className="w-full px-2 py-1.5 block">
                     Contact Us
                   </Link>
                 </DropdownMenuItem>
@@ -187,20 +197,54 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end space-x-0">
-        <Link href={"/login"}>
-          <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
-            <LogIn size={20} />
-            <span className="hidden sm:inline">LogIn</span>
-          </button>
-        </Link>
-        <Link href={"/register"}>
-          <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
-            <UserRoundPlus size={20} />
-            <span className="hidden sm:inline">SignUp</span>
-          </button>
-        </Link>
-      </div>
+      {!user ? (
+        <div className="navbar-end space-x-0">
+          <Link href={"/login"}>
+            <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
+              <LogIn size={20} />
+              <span className="hidden sm:inline">LogIn</span>
+            </button>
+          </Link>
+
+          <Link href={"/register"}>
+            <button className="flex items-center text-md gap-2 px-1 py-1 text-white/90 rounded-lg hover:bg-white/10 hover:text-white transition duration-200">
+              <UserRoundPlus size={20} />
+              <span className="hidden sm:inline">SignUp</span>
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div className="navbar-end space-x-0">
+          <div className="dropdown dropdown-end h-10 w-10">
+            <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 border border-gray-400 rounded-full">
+                <Image
+                  alt="User avatar"
+                  src={`https://res.cloudinary.com/jniac-just/${user.image}`}
+                  // className=" object-contain"
+                  width={10}
+                  height={10}
+                />
+              </div>
+            </div>
+
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <Link href={"/dashboard"}>
+                <li>
+                  <button className="justify-between">Dashboard</button>
+                </li>
+              </Link>
+
+              <li>
+                <button onClick={handleLogout}>Sign Out</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

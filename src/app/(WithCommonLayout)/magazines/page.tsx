@@ -56,15 +56,13 @@ const MagazinePage = async () => {
                 <option>Title A-Z</option>
                 <option>Most Recent</option>
               </select>
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                ⬆️⬇️
-              </div>
+              
             </div>
 
             {/* Create New Magazine Button */}
-            <button className="bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+          <Link href={"magazines/create"} > <button className="bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
               Create New Magazine
-            </button>
+            </button></Link> 
           </div>
         </div>
 

@@ -1,5 +1,4 @@
 import LoginForm from "@/components/modules/auth/login/LoginForm";
-import img from "../../assets/auth/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy.jpg"
 
 
 const page = () => {
@@ -9,7 +8,7 @@ const page = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            `url(${img.src})`
+            `url(https://res.cloudinary.com/jniac-just/image/upload/v1763146148/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy_covdnd.jpg)`
         }}
       ></div>
       <LoginForm />

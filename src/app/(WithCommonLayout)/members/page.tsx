@@ -1,4 +1,5 @@
 import Card from "@/components/modules/member/Card";
+import { baseURL } from "@/services/config/BaseURL";
 import { Member } from "@/types/member";
 import { Metadata } from "next";
 
@@ -6,54 +7,17 @@ export const metadata : Metadata = {
   title : "JNIAC JUST | Our Team",
 }
 
-export default function Page() {
-  const members: Member[] = [
-    {
-    id: "1",
-    first_name: "Partho",
-    last_name: "Mondal",
-    email: "partho.mondal@example.com",
-    address: "Jashore, Bangladesh",
-    phone_number: "+8801700000001",
-    role: "President",
-    institute: "Jashore University of Science and Technology",
-    profession: "Physics Student",
-    bio: "An enthusiastic physics undergraduate with a deep interest in astronomy and scientific outreach.",
-    qualifications: "BSc in Physics (Running)",
-    experience: "2+ years of experience in academic clubs and astronomy-related activities.",
-    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
-  },
-  {
-    id: "2",
-    first_name: "Nusrat",
-    last_name: "Jahan",
-    email: "nusrat.jahan@example.com",
-    address: "Dhaka, Bangladesh",
-    phone_number: "+8801700000002",
-    role: "General Secretary",
-    institute: "University of Dhaka",
-    profession: "Research Assistant",
-    bio: "Actively involved in organizing seminars, webinars, and scientific publications.",
-    qualifications: "MSc in Physics",
-    experience: "3 years of experience in academic research and event coordination.",
-    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
-  },
-  {
-    id: "3",
-    first_name: "Rafi",
-    last_name: "Hasan",
-    email: "rafi.hasan@example.com",
-    address: "Khulna, Bangladesh",
-    phone_number: "+8801700000003",
-    role: "Treasurer",
-    institute: "Khulna University",
-    profession: "Lecturer",
-    bio: "Passionate about teaching physics and promoting science among students.",
-    qualifications: "MSc in Applied Physics",
-    experience: "5 years of teaching experience at university level.",
-    image: "https://res.cloudinary.com/jniac-just/image/upload/v1762962069/default_for_users_hpwnzn.jpg"
-  },
-  ];
+export default async function  Page() {
+  
+  const response3 = await fetch(
+      `${baseURL}/api/members/`,
+      {
+        cache: "no-cache",
+      }
+    );
+  
+   
+    const members: Member[] = await response3.json();
 
   return (
     <div className="min-h-screen py-30 bg-slate-900 px-4">

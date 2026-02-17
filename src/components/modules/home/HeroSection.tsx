@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const HeroSection = () => {
   return ( 
@@ -18,8 +19,8 @@ const HeroSection = () => {
 
       {/* Foreground Content */}
       <div className="relative mt-6 z-10 flex flex-col items-center justify-center h-full text-center px-4">
-        <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
-          <span className="text-8xl">T</span>HINK DEEP AND EXPL<span>🪐</span>RE<span className="text-cyan-500">!</span>
+        <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
+          <span className="text-5xl md:text-8xl">T</span>HINK DEEP AND EXPL🪐RE<span className="text-cyan-500">!</span>
         </h1>
 
         <p className="text-gray-300 text-lg md:text-xl backdrop-blur-sm mt-6 max-w-2xl">
@@ -27,7 +28,7 @@ const HeroSection = () => {
         </p>
 
         <div  className="mt-8">
-          <Button className="bg-transparent text-white border-2 hover:text-black hover:border-0 border-cyan-500">Explore Exhibits</Button>
+         <Link href={"/magazines"}> <Button className="bg-transparent text-white border-2 hover:text-black hover:border-0 border-cyan-500">Explore Exhibits</Button></Link>
          
         </div>
       </div>

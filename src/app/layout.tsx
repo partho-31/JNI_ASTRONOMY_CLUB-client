@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/themes/theme-provider";
-import AOSProvider from "@/providers/AOSProvider";
+// import AOSProvider from "@/providers/AOSProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +29,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > <AOSProvider />
+      > 
+      {/* <AOSProvider /> */}
          <ThemeProvider
             attribute="class"
             defaultTheme="system"

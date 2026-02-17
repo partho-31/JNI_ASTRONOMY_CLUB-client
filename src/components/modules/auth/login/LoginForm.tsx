@@ -10,31 +10,38 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginUser } from "@/services/authServices";
+import { loginUser, userProfile } from "@/services/authServices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { LoginSchema } from "./LoginValidation";
 import { Response } from "@/types/response";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(LoginSchema),
   });
 
-  const {formState: { isSubmitting }} = form
+  const {
+    formState: { isSubmitting },
+  } = form;
 
   const OnSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res : Response = await loginUser(data)
-      if (res?.success){
-          toast.success("Login successful")
-      }else {
-        toast.error(res?.message)
+      const res: Response = await loginUser(data);
+      if (res?.success) {
+        toast.success("Login successful! Please wait a second");
+        const response: Response = await userProfile();
+        if (response.success) {
+          router.push("/");
+        }
+      } else {
+        toast.error(res?.detail);
       }
-      console.log(res)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -42,9 +49,9 @@ const LoginForm = () => {
     <div className="w-full max-w-md m-3 md:m-3 bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-cyan-500/30">
       <div className="text-center mb-3 md:mb-8">
         <h1 className="text-lg md:text-3xl font-bold bg-linear-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-          Login
+          Back Again! Stargazer<span className="text-yellow-400">✨</span>
         </h1>
-        <p className="text-gray-300 mt-2">Welcome back!</p>
+        <p className="text-gray-300 mt-2">lets explore the universe again.</p>
       </div>
 
       <Form {...form}>
@@ -96,12 +103,11 @@ const LoginForm = () => {
             )}
           />
 
-
           <Button
             type="submit"
             className="w-full bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
           >
-             { isSubmitting ? "Signing..." : 'Sign In'}
+            {isSubmitting ? "Signing..." : "Sign In"}
           </Button>
         </form>
       </Form>
