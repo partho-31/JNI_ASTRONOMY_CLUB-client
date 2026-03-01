@@ -1,6 +1,8 @@
 import { baseURL } from "@/services/config/BaseURL";
 import { Magazine } from "@/types/magazine";
+import { PenSquare } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -9,7 +11,7 @@ export async function generateMetadata({
 }) {
   const { magazineId } = await params;
   const magazine = await fetch(`${baseURL}/api/magazines/${magazineId}`).then(
-    (res) => res.json()
+    (res) => res.json(),
   );
 
   return {
@@ -27,8 +29,15 @@ const SingleMagazinePage = async ({
   const response = await fetch(`${baseURL}/api/magazines/${magazineId}`);
   const magazine: Magazine = await response.json();
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })}
+
   return (
-    <div className="min-h-screen pt-20 bg-slate-950 text-white">
+    <div className="min-h-screen pt-20 px-6 bg-slate-950 text-white">
       {/* Magazine Header */}
       <div className="relative bg-slate-950 backdrop-blur-lg border-b border-slate-700/50">
         <div className="container mx-auto px-4 py-8">
@@ -65,22 +74,12 @@ const SingleMagazinePage = async ({
                   Key Outcomes:
                 </h3>
                 <ul className="text-gray-300 grid grid-cols-1 md:grid-cols-2 gap-2">
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                    Deep field galaxy observations
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                    Exoplanet atmospheric analysis
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                    Star formation mechanisms
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                    Cosmic distance measurements
-                  </li>
+                  {magazine?.outcomes?.split(".").map((line, index) => (
+                    <li className="flex items-center gap-2" key={index}>
+                      <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                      {line}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -92,9 +91,11 @@ const SingleMagazinePage = async ({
                 <button className="bg-slate-700/50 border border-slate-600 hover:border-cyan-500/50 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2">
                   📖 Read Online
                 </button>
-                <button className="bg-slate-700/50 border border-slate-600 hover:border-purple-500/50 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2">
-                  ⭐ Bookmark
-                </button>
+                <div>
+              <Link href={`${magazineId}/edit`}><button className="flex items-center gap-2 bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+                <PenSquare size={20} /> Edit
+              </button> </Link>
+            </div>
               </div>
 
               {/* Meta Information */}
@@ -109,7 +110,7 @@ const SingleMagazinePage = async ({
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  📅 Published: {magazine.created_at}
+                  📅 Published: {formatDate(magazine.created_at)}
                 </div>
                 <div className="flex items-center gap-2">
                   ⏱️ 8 Articles • {magazine.read_time} total
@@ -118,18 +119,11 @@ const SingleMagazinePage = async ({
               </div>
             </div>
           </div>
-        </div>
         <div>
-          <p className="text-gray-300 text-lg m-6 leading-relaxed">
-            A comprehensive collection of research articles and discoveries from
-            the James Webb Space Telescopes inaugural year, featuring deep field
-            observations, exoplanet atmospheric studies, and revolutionary
-            insights into cosmic evolution. Lorem ipsum dolor, sit amet
-            consectetur adipisicing elit. Cumque, hic placeat expedita libero
-            inventore nostrum perspiciatis iste, molestiae, eos eligendi
-            delectus? Ex quo labore, veniam voluptate totam soluta impedit
-            ducimus?
+          <p className="text-gray-300 text-lg my-6 leading-relaxed">
+            {magazine.discription}
           </p>
+        </div>
         </div>
       </div>
 
@@ -142,9 +136,12 @@ const SingleMagazinePage = async ({
           <div className="flex items-center gap-4">
             <span className="text-gray-400">8 articles</span>
             {/* Create New Magazine Button */}
-            <button className="bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
-              Create New Article
-            </button>
+            <Link href={`${magazineId}/create-article`}>
+              {" "}
+              <button className="bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+                Create New Article
+              </button>
+            </Link>
           </div>
         </div>
 

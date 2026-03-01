@@ -145,17 +145,17 @@ export default function UpdateProfileForm() {
             </div>
 
             <div className="space-y-2">
-              <Label>Qualifications</Label>
+              <Label>Qualifications (*use coma(,) to separate line)</Label>
               <Input {...register("qualifications")} />
             </div>
 
             <div className="space-y-2">
-              <Label>Experience</Label>
+              <Label>Experience (*use dot(.) to separate line)</Label>
               <Textarea {...register("experience")} />
             </div>
 
             <div className="space-y-2">
-              <Label>Bio</Label>
+              <Label>Bio (*not more then 3 lines)</Label>
               <Textarea {...register("bio")} />
             </div>
 

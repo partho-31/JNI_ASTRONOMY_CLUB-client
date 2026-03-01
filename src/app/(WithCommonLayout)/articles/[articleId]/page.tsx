@@ -1,6 +1,7 @@
 import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import Image from "next/image";
+import Link from "next/link";
 
 export const generateMetadata = async ({
   params,
@@ -32,12 +33,18 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Article Meta */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+          <div className="flex justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2"><span className="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm font-medium">
               {article.magazine}
             </span>
             <span className="text-gray-400">•</span>
-            <span className="text-gray-400">{article.read_time}</span>
+            <span className="text-gray-400">{article.read_time}</span></div>
+            <div>
+              <Link href={`${articleId}/edit`}><button className="bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white font-semibold py-1 px-4 rounded-xl transition-all duration-200 transform hover:scale-105">
+                Edit
+              </button> </Link>
+            </div>
+            
           </div>
 
           <h1 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
@@ -93,15 +100,6 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
             {article.discription}
           </p>
 
-          <p className="text-gray-300 leading-relaxed mb-8">
-            This single image, targeting the galaxy cluster SMACS 0723,
-            represents more than just a technological achievement. It is a
-            portal to the cosmic dawn, offering glimpses of the universe during
-            its formative years. The data challenges existing models of galaxy
-            formation and provides revolutionary insights into the timeline of
-            cosmic evolution, dark matter distribution, and the processes that
-            shaped the universe as we know it today.
-          </p>
 
           {/* Main Content Sections */}
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
@@ -112,14 +110,14 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
             {article.paragraph_01}
           </p>
 
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
+            {article.heading_02}
+          </h2>
+
           <p className="text-gray-300 leading-relaxed mb-6">
-            The technical achievement behind this observation cannot be
-            overstated. James Webb Space Telescope Near-Infrared Camera captured
-            the image through twelve hours of exposure across different infrared
-            wavelengths. The resulting composite reveals features and structures
-            with a clarity that continues to astonish astronomers months after
-            its initial release.
+            {article.paragraph_02}
           </p>
+
 
           {/* Key Discovery Section */}
           <div className="bg-slate-800 border-l-4 border-cyan-500 pl-6 py-4 my-8 rounded-r-lg">
@@ -132,83 +130,35 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
             </p>
           </div>
 
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
-            {article.heading_02}
-          </h2>
+          
 
-          <p className="text-gray-300 leading-relaxed mb-6">
-            {article.paragraph_02}
-          </p>
-
-          <p className="text-gray-300 leading-relaxed mb-6">
-            Several galaxies in the deep field show evidence of disk-like
-            structures and spiral arms—features that theoretically require
-            billions of years to develop. Their existence mere hundreds of
-            millions of years after the Big Bang suggests either accelerated
-            formation processes or fundamental gaps in our understanding of dark
-            matter and gravitational interactions in the early universe.
-          </p>
-
-          {/* Technical Details */}
-          <h3 className="text-2xl font-bold mt-10 mb-4 text-purple-400">
+     
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-cyan-400">
             {article.heading_03}
-          </h3>
+          </h2>
 
           <p className="text-gray-300 leading-relaxed mb-6">
             {article.paragraph_03}
           </p>
 
-          <p className="text-gray-300 leading-relaxed mb-8">
-            This chemical maturity implies that star formation began even
-            earlier than we can currently observe, pushing the timeline of the
-            first stars and galaxies further back into the cosmic dark ages. The
-            universe appears to have been bustling with activity during what we
-            previously considered its quiet, formative years.
-          </p>
-
-          {/* Implications Section */}
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
-            Implications for Cosmic Evolution
+        
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-cyan-400">
+            {article.heading_04}
           </h2>
 
           <p className="text-gray-300 leading-relaxed mb-6">
-            The implications of these findings extend far beyond galaxy
-            formation timelines. They touch upon fundamental questions about
-            dark matter, the rate of cosmic expansion, and the nature of the
-            first stars. If galaxies formed earlier and faster than predicted,
-            our models of dark matter may need adjustment, potentially pointing
-            toward different particle properties or interaction mechanisms.
+            {article.paragraph_04}
           </p>
 
-          <p className="text-gray-300 leading-relaxed mb-6">
-            The early abundance of massive galaxies also has implications for
-            the timeline of cosmic reionization—the period when the first stars
-            and galaxies ionized the neutral hydrogen that filled the early
-            universe. James Webb Space Telescope observations suggest this
-            process may have begun earlier and progressed more rapidly than
-            previously estimated.
-          </p>
-
-          {/* Conclusion */}
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400 border-b border-slate-700 pb-2">
-            A New Chapter in Astronomy
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-cyan-400">
+            {article.heading_05}
           </h2>
 
-          <p className="text-gray-300 leading-relaxed mb-8">
-            The first deep field image from the James Webb Space Telescope
-            represents more than just a beautiful picture—it is a fundamental
-            shift in our understanding of cosmic history. Each galaxy in that
-            frame tells a story of formation, evolution, and the complex
-            interplay of physical processes that shaped our universe.
+          <p className="text-gray-300 leading-relaxed mb-6">
+            {article.paragraph_05}
           </p>
 
-          <p className="text-gray-300 leading-relaxed mb-12">
-            As analysis continues and more observations are conducted, we stand
-            at the threshold of a new era in astronomy. The questions raised by
-            this single image will drive research for decades to come, pushing
-            the boundaries of our knowledge and reminding us that the universe
-            always has new surprises in store for those who dare to look deeper.
-          </p>
+         
         </article>
 
         {/* Reviews and Rating Section */}

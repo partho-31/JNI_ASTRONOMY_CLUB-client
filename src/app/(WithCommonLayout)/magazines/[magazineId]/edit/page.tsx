@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,10 +11,25 @@ import { ArrowLeftRight, UploadCloud } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { getAccessToken } from "@/services/authServices";
+import { useParams } from "next/navigation";
+import { Magazine } from "@/types/magazine";
 
 export default function MagazineForm() {
-  const { register, handleSubmit, reset } = useForm<FieldValues>();
+  const { register, handleSubmit, reset ,  formState: { isSubmitting } } = useForm<FieldValues>();
   const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const { magazineId } = useParams<{ magazineId: string }>();
+
+  useEffect(() => {
+    const handlefetch = async () => {
+      const response = await fetch(
+        `https://jni-astronomy-club.vercel.app/api/magazines/${magazineId}`,
+      );
+      const magazine: Magazine = await response.json();
+      reset(magazine);
+    };
+    handlefetch();
+  }, [magazineId, reset]);
 
   const onSubmit = async (data: FieldValues) => {
     const token = await getAccessToken();
@@ -30,9 +45,9 @@ export default function MagazineForm() {
 
     try {
       const res = await fetch(
-        `https://jni-astronomy-club.vercel.app/api/magazines/`,
+        `https://jni-astronomy-club.vercel.app/api/magazines/${magazineId}/`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             Authorization: `JWT ${token}`,
           },
@@ -43,20 +58,20 @@ export default function MagazineForm() {
       if (!res.ok) throw new Error("Failed");
 
       reset();
-      toast("Magazine created successfully!");
-      setImageFile(null)
-    } catch (err : any) {
-      toast("Failed to create magazine");
-      throw Error(err)
+      toast("Magazine has benn updated!");
+      setImageFile(null);
+    } catch (err: any) {
+      toast("Failed to update magazine");
+      throw Error(err);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-10">
+    <div className="max-w-3xl mx-auto py-25 px-6">
       <Card className="shadow-xl border-muted">
         <CardHeader>
           <CardTitle className="text-xl md:text-2xl text-center font-bold">
-            Create New Magazine
+            Update Magazine
           </CardTitle>
         </CardHeader>
 
@@ -160,9 +175,11 @@ export default function MagazineForm() {
             {/* Submit */}
             <Button
               type="submit"
-              className="w-full text-md md:text-lg py-3 md:py-6"
+              disabled={isSubmitting}
+              className="w-full cursor-pointer text-md md:text-lg py-3 md:py-6"
             >
-              Publish Magazine 🚀
+                {isSubmitting ?  "submitting..."  : "Publish Magazine 🚀"}
+              
             </Button>
           </form>
         </CardContent>

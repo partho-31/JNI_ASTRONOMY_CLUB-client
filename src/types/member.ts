@@ -9,6 +9,7 @@ export interface Member {
   institute: string;
   profession: string;
   bio: string;
+  is_staff : boolean;
   qualifications: string;
   experience: string;
   image: string;

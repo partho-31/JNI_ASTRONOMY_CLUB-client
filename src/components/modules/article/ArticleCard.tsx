@@ -21,7 +21,7 @@ const ArticleCard = ({article} : { article : Article}) => {
               <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent" />
 
               <div className="absolute top-4 right-4 bg-purple-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                {article.magazine}
+                {article.magazine_title}
               </div>
             </div>
 

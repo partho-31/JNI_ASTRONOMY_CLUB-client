@@ -71,7 +71,7 @@ const HomePage = async () => {
         <h3 className="text-3xl font-semibold mb-8">✨ Our Stellar Team</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {members.map((member) => (
-            <Link href={`/member`} key={member.id}>
+            <Link href={`/members`} key={member.id}>
               <MemberCard member={member} />
             </Link>
           ))}

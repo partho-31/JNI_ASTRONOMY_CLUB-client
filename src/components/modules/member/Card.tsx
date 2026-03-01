@@ -38,7 +38,11 @@ const Card = ({user} : {user : Member}) => {
       {/* Experience */}
       <div className="mt-3">
         <h3 className="text-sm font-semibold text-indigo-300">Experience</h3>
-        <p className="text-slate-300 text-sm mt-1">{user?.experience}</p>
+        <ul className="text-slate-300 text-sm mt-1 list-disc list-inside space-y-1">
+          {user?.experience?.split(".").map((q, i) => (
+            <li key={i}>{q}</li>
+          ))}
+        </ul>
       </div>
 
       {/* Qualifications */}

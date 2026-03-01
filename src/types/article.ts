@@ -11,6 +11,10 @@ export interface Article {
   paragraph_02?: string | null;
   heading_03?: string | null;
   paragraph_03?: string | null;
+  heading_04?: string | null;
+  paragraph_04?: string | null;
+  heading_05?: string | null;
+  paragraph_05?: string | null;
   quoter?: string | null;
   quotes?: string | null;
 
@@ -18,7 +22,9 @@ export interface Article {
   created_at: string;           
   updated_at: string;
   read_time: string;
+  avg_rating : string;
   magazine : string;
+  magazine_title : string;
   author : {
     image : string;
     first_name : string;

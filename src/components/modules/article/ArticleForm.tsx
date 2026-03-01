@@ -11,11 +11,13 @@ import { ArrowLeftRight, UploadCloud } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { getAccessToken } from "@/services/authServices";
+import { useParams } from "next/navigation";
 
-export default function MagazineForm() {
+export default function ArticleForm() {
+  const {magazineId} = useParams<{magazineId : string}>()
   const { register, handleSubmit, reset } = useForm<FieldValues>();
   const [imageFile, setImageFile] = useState<File | null>(null);
-
+  
   const onSubmit = async (data: FieldValues) => {
     const token = await getAccessToken();
     const formData = new FormData();
@@ -27,27 +29,29 @@ export default function MagazineForm() {
     if (imageFile) {
       formData.append("cover_img", imageFile);
     }
-
+    formData.append("magazine",magazineId);
     try {
       const res = await fetch(
-        `https://jni-astronomy-club.vercel.app/api/magazines/`,
+        `https://jni-astronomy-club.vercel.app/api/articles/`,
         {
           method: "POST",
           headers: {
             Authorization: `JWT ${token}`,
           },
           body: formData,
-        },
+        }
       );
-
-      if (!res.ok) throw new Error("Failed");
-
+ 
+      if(res.ok){
       reset();
-      toast("Magazine created successfully!");
-      setImageFile(null)
+      setImageFile(null);
+      toast("Article created successfully!");}
+      else {
+        toast("Failed")
+      }
     } catch (err : any) {
-      toast("Failed to create magazine");
       throw Error(err)
+      toast("Failed to create article");
     }
   };
 
@@ -56,92 +60,110 @@ export default function MagazineForm() {
       <Card className="shadow-xl border-muted">
         <CardHeader>
           <CardTitle className="text-xl md:text-2xl text-center font-bold">
-            Create New Magazine
+            Create New Article
           </CardTitle>
         </CardHeader>
 
         <CardContent>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 md:space-y-6"
+            className="space-y-5"
           >
             {/* Title */}
             <div className="space-y-2">
               <Label>Title *</Label>
-              <Input
-                placeholder="Enter magazine title"
-                {...register("title", { required: true })}
-              />
+              <Input {...register("title", { required: true })} />
             </div>
 
             {/* Subtitle */}
             <div className="space-y-2">
               <Label>Subtitle</Label>
-              <Input
-                placeholder="Optional subtitle"
-                {...register("sub_title")}
-              />
+              <Input {...register("sub_title")} />
             </div>
 
             {/* Description */}
             <div className="space-y-2">
               <Label>Description *</Label>
-              <Textarea
-                rows={4}
-                placeholder="Write description..."
-                {...register("discription", { required: true })}
-              />
-            </div>
-
-            {/* Outcomes */}
-            <div className="space-y-2">
-              <Label>Outcomes *</Label>
-              <Textarea
-                rows={3}
-                placeholder="Learning outcomes..."
-                {...register("outcomes", { required: true })}
-              />
+              <Textarea rows={4} {...register("discription", { required: true })} />
             </div>
 
             {/* Summary */}
             <div className="space-y-2">
               <Label>Summary *</Label>
-              <Textarea
-                rows={3}
-                placeholder="Short summary..."
-                {...register("summary", { required: true })}
-              />
+              <Textarea rows={3} {...register("summary", { required: true })} />
+            </div>
+
+            {/* Heading 1 */}
+            <div className="space-y-2">
+              <Label>Heading 01</Label>
+              <Input {...register("heading_01")} />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Paragraph 01</Label>
+              <Textarea rows={3} {...register("paragraph_01")} />
+            </div>
+
+            {/* Heading 2 */}
+            <div className="space-y-2">
+              <Label>Heading 02</Label>
+              <Input {...register("heading_02")} />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Paragraph 02</Label>
+              <Textarea rows={3} {...register("paragraph_02")} />
+            </div>
+
+            {/* Heading 3 */}
+            <div className="space-y-2">
+              <Label>Heading 03</Label>
+              <Input {...register("heading_03")} />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Paragraph 03</Label>
+              <Textarea rows={3} {...register("paragraph_03")} />
+            </div>
+
+            {/* Quote */}
+            <div className="space-y-2">
+              <Label>Quote</Label>
+              <Textarea rows={2} {...register("quotes")} />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Quoter</Label>
+              <Input {...register("quoter")} />
             </div>
 
             {/* Read Time */}
             <div className="space-y-2">
               <Label>Read Time *</Label>
-              <Input
-                placeholder="e.g. 5 min read"
-                {...register("read_time", { required: true })}
-              />
+              <Input {...register("read_time", { required: true })} />
             </div>
 
             {/* Image Upload */}
             <div className="space-y-3">
               <Label>Cover Image</Label>
 
-              <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-2 cursor-pointer hover:bg-muted transition">
+              <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-3 cursor-pointer hover:bg-muted transition">
                 {!imageFile && (
-                  <div className="flex flex-col items-center justify-center">
+                  <div className="flex flex-col items-center">
                     <UploadCloud className="w-6 h-6 mb-2 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground">
                       Click to upload
                     </span>
                   </div>
                 )}
+
                 <input
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  {...register("cover_img")}
                   onChange={(e) => setImageFile(e.target.files?.[0] || null)}
                 />
+
                 {imageFile && (
                   <div className="flex items-baseline gap-3">
                     <Image
@@ -158,11 +180,8 @@ export default function MagazineForm() {
             </div>
 
             {/* Submit */}
-            <Button
-              type="submit"
-              className="w-full text-md md:text-lg py-3 md:py-6"
-            >
-              Publish Magazine 🚀
+            <Button type="submit" className="w-full cursor-pointer py-5 text-lg">
+              Publish Article 
             </Button>
           </form>
         </CardContent>
