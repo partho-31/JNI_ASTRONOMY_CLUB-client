@@ -1,10 +1,8 @@
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AuthProvider } from "@/context/AuthContext";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <AuthProvider>
       <SidebarProvider>
         {/* Sidebar + Content in same row */}
         <div className="flex w-full h-screen overflow-hidden">
@@ -26,7 +24,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </SidebarProvider>
-    </AuthProvider>
   );
 };
 

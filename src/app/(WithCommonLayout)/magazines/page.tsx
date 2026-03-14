@@ -15,7 +15,6 @@ const MagazinePage = async () => {
       cache: "no-cache",
     }
   );
-console.log(response)
   const magazines: Magazine[] = await response.json();
 
   return (

@@ -21,21 +21,28 @@ const RegistrationForm = () => {
     resolver: zodResolver(RegistrationSchema),
   });
 
-  const {formState: { isSubmitting }} = form
+  const {
+    formState: { isSubmitting },
+  } = form;
 
   const password = form.watch("password");
   const confirmPassword = form.watch("passwordConfirm");
 
   const OnSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await registerUser(data)
-      if (res.ok){
-          toast.success("We’ve sent you a verification email. Please verify your account!")
-      }else {
-        toast.error("Something went wrong! Please try again later.")
+      const res = await registerUser(data);
+      if (res?.id) {
+        toast.success(
+          "We’ve sent you a verification email. Please verify your account!",
+        );
+      } else if (res?.email) {
+        toast.warning(`${res.email[0]}`);
+      } else {
+        toast.error("Something went wrong! Please try again later.");
       }
+      form.reset();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -128,10 +135,10 @@ const RegistrationForm = () => {
 
           <Button
             type="submit"
-            disabled = {!!confirmPassword && password != confirmPassword }
+            disabled={!!confirmPassword && password != confirmPassword}
             className="w-full bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
           >
-             { isSubmitting ? "Launching..." : 'Launch Account 🚀'}
+            {isSubmitting ? "Launching..." : "Launch Account 🚀"}
           </Button>
         </form>
       </Form>

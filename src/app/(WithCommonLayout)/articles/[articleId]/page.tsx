@@ -65,7 +65,7 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
                   {article.author.first_name} {article.author.last_name}
                 </div>
                 <div className="text-gray-400 text-sm">
-                  Senior Astrophysicist • December 15, 2024
+                  {article.author.role} - JNIAC JUST
                 </div>
               </div>
             </div>

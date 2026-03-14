@@ -1,12 +1,13 @@
 export interface Magazine {
-  id: string;               
+  id: string;
   title: string;
   sub_title?: string | null;
-  cover_img?: string | null; 
+  cover_img?: string | null;
   discription: string;
   outcomes: string;
   summary: string;
-  created_at: string;       
-  updated_at: string;       
+  created_at: string;
+  updated_at: string;
   read_time: string;
+  status: string;
 }

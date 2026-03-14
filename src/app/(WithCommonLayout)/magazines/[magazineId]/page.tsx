@@ -100,15 +100,7 @@ const SingleMagazinePage = async ({
 
               {/* Meta Information */}
               <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-slate-700/50 text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-linear-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                    AS
-                  </div>
-                  <div>
-                    <div className="text-white">Dr. Alex Sterling</div>
-                    <div>Astrophysicist</div>
-                  </div>
-                </div>
+                
                 <div className="flex items-center gap-2">
                   📅 Published: {formatDate(magazine.created_at)}
                 </div>

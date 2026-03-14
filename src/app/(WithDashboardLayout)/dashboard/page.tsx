@@ -1,19 +1,17 @@
 import { ChartAreaLinear } from "@/components/ui/area-chart";
 import { ChartBarMultiple } from "@/components/ui/bar-chart";
 import { Metadata } from "next";
+import Link from "next/link";
 
-export const metadata : Metadata = {
-  title : "Dashboard",
-}
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 
 const AdminDashboard = () => {
   return (
     <div className="flex lg:pt-0 pt-10 bg-slate-900 text-white">
-    
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-       
-
         {/* Stats Cards */}
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Total Visitors */}
@@ -71,28 +69,34 @@ const AdminDashboard = () => {
         <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Line Chart */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
-           <ChartAreaLinear />
+            <ChartAreaLinear />
           </div>
 
           {/* Bar Chart */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
             <ChartBarMultiple />
-           </div>
+          </div>
         </div>
 
         {/* Recent Activity and Quick Stats */}
         <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent Activity */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
-            <h2 className="text-xl font-bold text-white mb-6">Recent Activity</h2>
+            <h2 className="text-xl font-bold text-white mb-6">
+              Recent Activity
+            </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-4 p-3 hover:bg-slate-700 rounded-lg transition-colors">
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
                   📄
                 </div>
                 <div className="flex-1">
-                  <div className="text-white font-medium">New article published</div>
-                  <div className="text-gray-400 text-sm">Cosmic Evolution Theories by Dr. Maria Johnson</div>
+                  <div className="text-white font-medium">
+                    New article published
+                  </div>
+                  <div className="text-gray-400 text-sm">
+                    Cosmic Evolution Theories by Dr. Maria Johnson
+                  </div>
                 </div>
                 <div className="text-gray-400 text-sm">2 hours ago</div>
               </div>
@@ -102,8 +106,12 @@ const AdminDashboard = () => {
                   👥
                 </div>
                 <div className="flex-1">
-                  <div className="text-white font-medium">New user registration</div>
-                  <div className="text-gray-400 text-sm">Ryan Kim joined as amateur astronomer</div>
+                  <div className="text-white font-medium">
+                    New user registration
+                  </div>
+                  <div className="text-gray-400 text-sm">
+                    Ryan Kim joined as amateur astronomer
+                  </div>
                 </div>
                 <div className="text-gray-400 text-sm">5 hours ago</div>
               </div>
@@ -113,8 +121,12 @@ const AdminDashboard = () => {
                   💬
                 </div>
                 <div className="flex-1">
-                  <div className="text-white font-medium">New review submitted</div>
-                  <div className="text-gray-400 text-sm">4.8⭐ rating for Black Hole Physics</div>
+                  <div className="text-white font-medium">
+                    New review submitted
+                  </div>
+                  <div className="text-gray-400 text-sm">
+                    4.8⭐ rating for Black Hole Physics
+                  </div>
                 </div>
                 <div className="text-gray-400 text-sm">1 day ago</div>
               </div>
@@ -125,7 +137,9 @@ const AdminDashboard = () => {
                 </div>
                 <div className="flex-1">
                   <div className="text-white font-medium">Magazine updated</div>
-                  <div className="text-gray-400 text-sm">Space Exploration Monthly new issue released</div>
+                  <div className="text-gray-400 text-sm">
+                    Space Exploration Monthly new issue released
+                  </div>
                 </div>
                 <div className="text-gray-400 text-sm">2 days ago</div>
               </div>
@@ -136,20 +150,21 @@ const AdminDashboard = () => {
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
             <h2 className="text-xl font-bold text-white mb-6">Quick Actions</h2>
             <div className="grid grid-cols-2 gap-4">
+              <Link href={"/magazines/create"}>
+                <button className="w-full bg-purple-600 hover:bg-purple-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
+                  <div className="text-2xl">📚</div>
+                  <span>Creatw Magazine</span>
+                </button>
+              </Link>
               <button className="bg-cyan-600 hover:bg-cyan-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
                 <div className="text-2xl">📄</div>
                 <span>Create Article</span>
               </button>
 
-              <button className="bg-purple-600 hover:bg-purple-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
-                <div className="text-2xl">📚</div>
-                <span>New Magazine</span>
-              </button>
-
-              <button className="bg-green-600 hover:bg-green-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
+            <Link href={"/admin/users"} > <button className="w-full bg-green-600 hover:bg-green-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
                 <div className="text-2xl">👥</div>
                 <span>Manage Users</span>
-              </button>
+              </button></Link> 
 
               <button className="bg-amber-600 hover:bg-amber-500 rounded-lg p-4 text-white font-medium transition-colors flex flex-col items-center gap-2">
                 <div className="text-2xl">📊</div>
@@ -159,7 +174,9 @@ const AdminDashboard = () => {
 
             {/* System Status */}
             <div className="mt-6 pt-6 border-t border-slate-700">
-              <h3 className="text-lg font-semibold text-white mb-4">System Status</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">
+                System Status
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400">Server Uptime</span>

@@ -15,10 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { LoginSchema } from "./LoginValidation";
-import { Response } from "@/types/response";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import AuthContext from "@/context/AuthContext";
 
 const LoginForm = () => {
+  const { setUser } = useContext(AuthContext);
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(LoginSchema),
@@ -30,12 +32,13 @@ const LoginForm = () => {
 
   const OnSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res: Response = await loginUser(data);
+      const res = await loginUser(data);
       if (res?.success) {
         toast.success("Login successful! Please wait a second");
-        const response: Response = await userProfile();
+        const response = await userProfile();
         if (response.success) {
           router.push("/");
+          setUser(response);
         }
       } else {
         toast.error(res?.detail);

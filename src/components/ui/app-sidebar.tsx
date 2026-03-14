@@ -8,6 +8,7 @@ import {
   Newspaper,
   Layers2,
   Bell,
+  CalendarClock,
 } from "lucide-react";
 
 import {
@@ -40,6 +41,11 @@ const items = [
     title: "Profile",
     url: "/dashboard/profile",
     icon: UserRoundPen,
+  },
+  {
+    title: "Event",
+    url: "/dashboard/event",
+    icon:  CalendarClock ,
   },
   {
     title: "Users",
