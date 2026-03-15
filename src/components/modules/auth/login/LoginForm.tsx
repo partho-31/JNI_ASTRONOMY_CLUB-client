@@ -15,13 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { LoginSchema } from "./LoginValidation";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthContext";
 
 const LoginForm = () => {
   const { setUser } = useContext(AuthContext);
   const router = useRouter();
+  const searchParams = useSearchParams()
   const form = useForm({
     resolver: zodResolver(LoginSchema),
   });
@@ -36,8 +37,9 @@ const LoginForm = () => {
       if (res?.success) {
         toast.success("Login successful! Please wait a second");
         const response = await userProfile();
+        const redirect = searchParams.get("redirect");
         if (response.success) {
-          router.push("/");
+          router.push(redirect || "/");
           setUser(response);
         }
       } else {
