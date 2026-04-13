@@ -18,11 +18,12 @@ import { LoginSchema } from "./LoginValidation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthContext";
+import GoogleLoginButton from "./GoogleLogin";
 
 const LoginForm = () => {
   const { setUser } = useContext(AuthContext);
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const form = useForm({
     resolver: zodResolver(LoginSchema),
   });
@@ -117,7 +118,7 @@ const LoginForm = () => {
         </form>
       </Form>
 
-      <div className="text-center mt-6">
+      <div className="text-center mt-1">
         <p className="text-gray-400 text-sm">
           Do not have any account?{" "}
           <a
@@ -127,6 +128,10 @@ const LoginForm = () => {
             Sign Up
           </a>
         </p>
+      </div>
+      <div className="text-center m-2 text-gray-400">Or</div>
+      <div className="mt-2 text-center w-full bg-linear-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
+        <GoogleLoginButton />
       </div>
     </div>
   );

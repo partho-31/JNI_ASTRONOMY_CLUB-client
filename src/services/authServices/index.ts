@@ -4,6 +4,7 @@ import { baseURL } from "../config/BaseURL";
 import { FieldValues } from "react-hook-form";
 import { cookies } from "next/headers";
 
+
 export const registerUser = async (userData: FieldValues) => {
   const res = await fetch(`${baseURL}/auth/users/`, {
     method: "POST",
@@ -28,7 +29,7 @@ export const loginUser = async (userData: FieldValues) => {
   }
 
   // SERVER-SIDE COOKIE
-  (await cookies()).set("authToken", result.access, {
+  (await cookies()).set("authToken", result?.access, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -39,10 +40,11 @@ export const loginUser = async (userData: FieldValues) => {
   return { success: true };
 };
 
+
+
 export const userProfile = async () => {
   const token = (await cookies()).get("authToken")?.value;
   if (!token) return null;
-
   const res = await fetch(`${baseURL}/auth/users/me/`, {
     headers: {
       Authorization: `JWT ${token}`,

@@ -44,7 +44,7 @@ const items = [
   },
   {
     title: "Event",
-    url: "/dashboard/event",
+    url: "/admin/event",
     icon:  CalendarClock ,
   },
   {
@@ -86,7 +86,7 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="my-4">
-              {items.map((item) => (
+              {items.map((item) => ( 
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     className="px-3 py-5 mb-0.5 hover:bg-cyan-600 rounded-lg text-white font-medium transition-colors"

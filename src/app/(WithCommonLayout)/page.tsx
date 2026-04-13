@@ -4,6 +4,7 @@ import HeroSection from "@/components/modules/home/HeroSection";
 import MagazineCard from "@/components/modules/home/MagazineCard";
 import MemberCard from "@/components/modules/home/MemberCard";
 import WhoWeAre from "@/components/modules/home/WhoWeAre";
+import Ticker from "@/components/ui/ticker";
 import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import { Magazine } from "@/types/magazine";
@@ -39,6 +40,7 @@ const HomePage = async () => {
 
   return (
     <div className="bg-slate-950 ">
+      <Ticker />
       <HeroSection />
       <WhoWeAre />
       <EventCard />

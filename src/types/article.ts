@@ -15,6 +15,10 @@ export interface Article {
   paragraph_04?: string | null;
   heading_05?: string | null;
   paragraph_05?: string | null;
+  heading_06?: string | null;
+  paragraph_06?: string | null;
+  heading_07?: string | null;
+  paragraph_07?: string | null;
   quoter?: string | null;
   quotes?: string | null;
 

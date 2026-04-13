@@ -13,8 +13,13 @@ import { toast } from "sonner";
 import { getAccessToken } from "@/services/authServices";
 import { baseURL } from "@/services/config/BaseURL";
 
-export default function MagazineForm() {
-  const { register, handleSubmit, reset } = useForm<FieldValues>();
+export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isLoading },
+  } = useForm<FieldValues>();
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const onSubmit = async (data: FieldValues) => {
@@ -26,29 +31,26 @@ export default function MagazineForm() {
     });
 
     if (imageFile) {
-      formData.append("cover_img", imageFile);
+      formData.append("image", imageFile);
     }
 
     try {
-      const res = await fetch(
-        `${baseURL}/api/magazines/`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `JWT ${token}`,
-          },
-          body: formData,
+      const res = await fetch(`${baseURL}/api/events/`, {
+        method: "POST",
+        headers: {
+          Authorization: `JWT ${token}`,
         },
-      );
+        body: formData,
+      });
 
       if (!res.ok) throw new Error("Failed");
 
       reset();
-      toast("Magazine created successfully!");
-      setImageFile(null)
-    } catch (err : any) {
-      toast("Failed to create magazine");
-      throw Error(err)
+      toast("Event created successfully!");
+      setImageFile(null);
+    } catch (err: any) {
+      toast("Failed to create event");
+      throw Error(err);
     }
   };
 
@@ -57,7 +59,7 @@ export default function MagazineForm() {
       <Card className="shadow-xl border-muted">
         <CardHeader>
           <CardTitle className="text-xl md:text-2xl text-center font-bold">
-            Create New Magazine
+            Create New Event
           </CardTitle>
         </CardHeader>
 
@@ -70,17 +72,17 @@ export default function MagazineForm() {
             <div className="space-y-2">
               <Label>Title *</Label>
               <Input
-                placeholder="Enter magazine title"
+                placeholder="Enter event title"
                 {...register("title", { required: true })}
               />
             </div>
 
-            {/* Subtitle */}
+            {/* Type */}
             <div className="space-y-2">
-              <Label>Subtitle</Label>
+              <Label>Type *</Label>
               <Input
-                placeholder="Optional subtitle"
-                {...register("sub_title")}
+                placeholder="Define event type i.g webinar, seminar"
+                {...register("type")}
               />
             </div>
 
@@ -90,36 +92,46 @@ export default function MagazineForm() {
               <Textarea
                 rows={4}
                 placeholder="Write description..."
-                {...register("discription", { required: true })}
+                {...register("description", { required: true })}
               />
             </div>
 
-            {/* Outcomes */}
+            {/* Location */}
             <div className="space-y-2">
-              <Label>Outcomes *</Label>
-              <Textarea
-                rows={3}
-                placeholder="Learning outcomes..."
-                {...register("outcomes", { required: true })}
-              />
-            </div>
-
-            {/* Summary */}
-            <div className="space-y-2">
-              <Label>Summary *</Label>
-              <Textarea
-                rows={3}
-                placeholder="Short summary..."
-                {...register("summary", { required: true })}
-              />
-            </div>
-
-            {/* Read Time */}
-            <div className="space-y-2">
-              <Label>Read Time *</Label>
+              <Label>Location *</Label>
               <Input
-                placeholder="e.g. 5 min read"
-                {...register("read_time", { required: true })}
+                placeholder="Enter event location"
+                {...register("location", { required: true })}
+              />
+            </div>
+
+            {/* Start_time */}
+            <div className="space-y-2">
+              <Label>Star time*</Label>
+              <Input
+                type="datetime-local"
+                placeholder="Enter start time"
+                {...register("start_time", { required: true })}
+              />
+            </div>
+
+            {/* End_time */}
+            <div className="space-y-2">
+              <Label>End time*</Label>
+              <Input
+                type="datetime-local"
+                placeholder="Enter end time"
+                {...register("end_time", { required: true })}
+              />
+            </div>
+
+            {/* RG link */}
+            <div className="space-y-2">
+              <Label>Registration Link *</Label>
+              <Input
+                type="url"
+                placeholder="Enter registration link"
+                {...register("registration_link", { required: true })}
               />
             </div>
 
@@ -140,7 +152,7 @@ export default function MagazineForm() {
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  {...register("cover_img")}
+                  {...register("image")}
                   onChange={(e) => setImageFile(e.target.files?.[0] || null)}
                 />
                 {imageFile && (
@@ -160,10 +172,11 @@ export default function MagazineForm() {
 
             {/* Submit */}
             <Button
+              disabled={isLoading}
               type="submit"
-              className="w-full text-md md:text-lg py-3 md:py-6"
+              className="w-full cursor-pointer text-md md:text-lg py-3 md:py-6"
             >
-              Publish Magazine 🚀
+              Publish Event 🚀
             </Button>
           </form>
         </CardContent>

@@ -1,3 +1,4 @@
+import RelatedArticles from "@/components/modules/article/RelatedArticles";
 import { baseURL } from "@/services/config/BaseURL";
 import { Magazine } from "@/types/magazine";
 import { PenSquare } from "lucide-react";
@@ -35,6 +36,8 @@ const SingleMagazinePage = async ({
       month: "long",
       day: "numeric",
     })}
+
+    
 
   return (
     <div className="min-h-screen pt-20 px-6 bg-slate-950 text-white">
@@ -138,40 +141,9 @@ const SingleMagazinePage = async ({
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Article 6 */}
-          <div className="group bg-slate-800/30 backdrop-blur-lg rounded-2xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/10">
-            <div className="relative h-40 overflow-hidden">
-              <div className="w-full h-full bg-linear-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
-                <div className="text-3xl">🕰️</div>
-              </div>
-              <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent" />
-              <div className="absolute top-3 right-3 bg-cyan-600/90 text-white px-2 py-1 rounded-full text-xs font-medium">
-                14 min
-              </div>
-            </div>
-
-            <div className="p-6">
-              <h3 className="text-lg font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors duration-200">
-                Timeline of Cosmic Evolution
-              </h3>
-
-              <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                Reconstructing the history of the universe from the first
-                galaxies to present day.
-              </p>
-
-              <div className="flex items-center justify-between text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <span>📖 3.2k reads</span>
-                </div>
-                <button className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200">
-                  Read Article →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <RelatedArticles magazineId={magazine.id} articleId={undefined} />
+         
+      
       </div>
     </div>
   );

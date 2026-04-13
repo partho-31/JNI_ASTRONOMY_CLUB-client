@@ -5,6 +5,7 @@ import Link from "next/link";
 const HeroSection = () => {
   return ( 
     <div className="relative w-full h-screen overflow-hidden">
+      
       {/* Background GIF */}
       <div
         className="absolute inset-0  bg-cover bg-center bg-no-repeat blur-[3px]"

@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import AuthContext from "@/context/AuthContext";
 import { getAccessToken } from "@/services/authServices";
+import { baseURL } from "@/services/config/BaseURL";
 
 
 
@@ -48,7 +49,7 @@ export default function UpdateProfileForm() {
       }
 
       const response = await fetch(
-        `https://jni-astronomy-club.vercel.app/auth/users/me/`,
+        `${baseURL}/auth/users/me/`,
         {
           method: "PATCH",
           headers: {

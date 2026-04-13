@@ -33,7 +33,7 @@ const Page = () => {
   const handleUserDeletion = async (id: string) => {
     const res = await deleteUser(id);
     if (res.error) {
-      toast.error("Something went wrong!");
+      toast.error("You do not have permission to perform this action");
     } else {
       toast.success("User has been deleted");
     }

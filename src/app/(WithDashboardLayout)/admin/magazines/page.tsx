@@ -13,11 +13,10 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 const Page = () => {
-  const { data, isLoading } = useGetMagazineQuery(undefined);
+  const { data, isLoading } = useGetMagazineQuery([]);
   const [deleteMagazine] = useDeleteMagazineMutation();
   const [searchByKeyword, setSearchByKeyword] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-
   const filteredMagazine = useMemo(() => {
     return data?.filter((magazine: Magazine) => {
       const searchQuery = searchByKeyword
@@ -183,7 +182,7 @@ const Page = () => {
       </div>
 
       {/* Empty State */}
-      {filteredMagazine?.length === 0 && (
+      {(filteredMagazine?.length === 0 || data?.length == 0) && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🔭</div>
           <h3 className="text-2xl font-bold text-gray-300 mb-2">

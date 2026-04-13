@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LogIn, UserRoundPlus } from "lucide-react";
+import { ChevronDown, LogIn, UserRoundPlus } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -67,9 +67,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a className="text-white hover:bg-white/10 hover:text-white">
+              <Link
+                href={"/magazines"}
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
                 Magazines
-              </a>
+              </Link>
             </li>
             <li>
               <Link
@@ -80,9 +83,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a className="text-white hover:bg-white/10 hover:text-white">
-                Our Researchers
-              </a>
+              <Link
+                href={"/members"}
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
+                Our Team
+              </Link>
             </li>
 
             <li>
@@ -94,9 +100,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a className="text-white hover:bg-white/10 hover:text-white">
+              <Link href={"/contact"} className="text-white hover:bg-white/10 hover:text-white">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -166,8 +172,8 @@ const Navbar = () => {
                   onMouseLeave={() => setOpen(false)}
                   className="text-white/90 hover:bg-white/10 hover:text-white rounded-lg transition-all duration-300 group inline-flex items-center px-3 cursor-pointer"
                 >
-                  <span className="group-hover:scale-110 transition-transform">
-                    Services
+                  <span className="flex justify-center items-center gap-0.5 group-hover:scale-110 transition-transform">
+                    Services <ChevronDown size={15} />
                   </span>
                 </span>
               </DropdownMenuTrigger>

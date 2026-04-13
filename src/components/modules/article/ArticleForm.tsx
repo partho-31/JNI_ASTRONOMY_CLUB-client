@@ -12,6 +12,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { getAccessToken } from "@/services/authServices";
 import { useParams } from "next/navigation";
+import { baseURL } from "@/services/config/BaseURL";
 
 export default function ArticleForm() {
   const {magazineId} = useParams<{magazineId : string}>()
@@ -32,7 +33,7 @@ export default function ArticleForm() {
     formData.append("magazine",magazineId);
     try {
       const res = await fetch(
-        `https://jni-astronomy-club.vercel.app/api/articles/`,
+        `${baseURL}/api/articles/`,
         {
           method: "POST",
           headers: {

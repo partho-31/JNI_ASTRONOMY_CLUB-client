@@ -184,7 +184,7 @@ const Page = () => {
       </div>
 
       {/* Empty State */}
-      {filteredArticles?.length === 0 && (
+      {(filteredArticles?.length === 0 || data?.length == 0)  && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🔭</div>
           <h3 className="text-2xl font-bold text-gray-300 mb-2">

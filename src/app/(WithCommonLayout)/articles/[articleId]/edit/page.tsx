@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { getAccessToken } from "@/services/authServices";
 import { Article } from "@/types/article";
 import { useParams } from "next/navigation";
+import { baseURL } from "@/services/config/BaseURL";
 
 export default function ArticleForm() {
   //   const { magazineId } = useParams<{ magazineId: string }>();
@@ -22,7 +23,7 @@ export default function ArticleForm() {
   useEffect(() => {
     const handlefetch = async () => {
       const response = await fetch(
-        `https://jni-astronomy-club.vercel.app/api/articles/${articleId}`,
+        `${baseURL}/api/articles/${articleId}`,
       );
       const article: Article = await response.json();
       reset(article);
@@ -43,7 +44,7 @@ export default function ArticleForm() {
     }
     try {
       const res = await fetch(
-        `https://jni-astronomy-club.vercel.app/api/articles/${articleId}/`,
+        `${baseURL}/api/articles/${articleId}/`,
         {
           method: "PATCH",
           headers: {

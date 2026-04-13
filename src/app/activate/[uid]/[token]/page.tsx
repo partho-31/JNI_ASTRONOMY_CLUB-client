@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Loader2, CheckCircle } from "lucide-react";
+import { baseURL } from "@/services/config/BaseURL";
 // import { baseURL } from "@/services/config/BaseURL";
 
 export default function ActivatePage() {
@@ -15,7 +16,7 @@ export default function ActivatePage() {
     const activateUser = async () => {
       try {
         const res = await fetch(
-          "https://jni-astronomy-club.vercel.app/auth/users/activation/",
+          `${baseURL}/auth/users/activation/`,
           {
             method: "POST",
             headers: {

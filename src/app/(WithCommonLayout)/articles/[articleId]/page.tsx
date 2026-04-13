@@ -1,3 +1,4 @@
+import RelatedArticles from "@/components/modules/article/RelatedArticles";
 import { baseURL } from "@/services/config/BaseURL";
 import { Article } from "@/types/article";
 import Image from "next/image";
@@ -158,6 +159,23 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
             {article.paragraph_05}
           </p>
 
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-cyan-400">
+            {article.heading_06}
+          </h2>
+
+          <p className="text-gray-300 leading-relaxed mb-6">
+            {article.paragraph_06}
+          </p>
+
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-cyan-400">
+            {article.heading_07}
+          </h2>
+
+          <p className="text-gray-300 leading-relaxed mb-6">
+            {article.paragraph_07}
+          </p>
+
+
          
         </article>
 
@@ -254,24 +272,7 @@ const Page = async ({ params }: { params: Promise<{ articleId: string }> }) => {
             Continue Reading
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Article Card */}
-            <div className="group bg-slate-700 rounded-xl p-6 border border-slate-600 hover:border-cyan-500 transition-all duration-300">
-              <h3 className="font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">
-                Exoplanet Atmospheric Studies with James Webb Space Telescope
-              </h3>
-              <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                Analyzing chemical compositions of distant worlds and searching
-                for biosignatures in planetary atmospheres.
-              </p>
-              <div className="flex items-center justify-between text-sm text-gray-400">
-                <span>12 minutes read</span>
-                <button className="text-cyan-400 hover:text-cyan-300 transition-colors">
-                  Read Article
-                </button>
-              </div>
-            </div>
-          </div>
+         <RelatedArticles magazineId={article.magazine} articleId={article.id} />
         </div>
       </div>
     </div>

@@ -1,21 +1,26 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
-export const metadata : Metadata = {
-  title : "JNIAC JUST | About Us",
-}
+export const metadata: Metadata = {
+  title: "JNIAC JUST | About Us",
+};
 
 const AboutSection = () => {
   return (
-    <div  className="py-30 bg-slate-950  overflow-hidden">
+    <div className="py-30 bg-slate-950  overflow-hidden">
       <div className="container mx-auto px-6 relative ">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Know About <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Us</span>
+            Know About{" "}
+            <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Us
+            </span>
           </h2>
           <div className="w-24 h-1 bg-linear-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
           <p className="text-slate-300 mt-6 text-lg max-w-2xl mx-auto">
-            Exploring the cosmos, one star at a time. Welcome to the heart of astronomical discovery at our university.
+            Exploring the cosmos, one star at a time. Welcome to the heart of
+            astronomical discovery at our university.
           </p>
         </div>
 
@@ -27,10 +32,13 @@ const AboutSection = () => {
                 <span className="text-cyan-400 text-xl">✦</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white mb-2">Who We Are</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  Who We Are
+                </h3>
                 <p className="text-slate-300">
-                  The Jamal Nazrul Islam Astronomy Club (JNIAC) is a vibrant community of space enthusiasts, 
-                  students and researchers dedicated to exploring the wonders of our universe.
+                  The Jamal Nazrul Islam Astronomy Club (JNIAC) is a vibrant
+                  community of space enthusiasts, students and researchers
+                  dedicated to exploring the wonders of our universe.
                 </p>
               </div>
             </div>
@@ -40,10 +48,13 @@ const AboutSection = () => {
                 <span className="text-blue-400 text-xl">☄️</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white mb-2">Our Mission</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  Our Mission
+                </h3>
                 <p className="text-slate-300">
-                  To inspire curiosity about the cosmos through observation, research, and education, 
-                  making astronomy accessible to everyone in our university community.
+                  To inspire curiosity about the cosmos through observation,
+                  research, and education, making astronomy accessible to
+                  everyone in our university community.
                 </p>
               </div>
             </div>
@@ -53,10 +64,13 @@ const AboutSection = () => {
                 <span className="text-purple-400 text-xl">🔭</span>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white mb-2">What We Do</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  What We Do
+                </h3>
                 <p className="text-slate-300">
-                  Regular stargazing sessions, workshops, guest lectures, research projects, 
-                  and participation in national astronomy events and competitions.
+                  Regular stargazing sessions, workshops, guest lectures,
+                  research projects, and participation in national astronomy
+                  events and competitions.
                 </p>
               </div>
             </div>
@@ -82,17 +96,18 @@ const AboutSection = () => {
           <div className="relative">
             <div className="bg-slate-800/50 rounded-2xl p-8 backdrop-blur-sm border border-slate-700/50">
               <div className="aspect-square rounded-lg bg-linear-to-br from-slate-900 to-slate-800 border border-slate-700 flex items-center justify-center relative overflow-hidden">
-
                 <div className="text-center text-slate-400">
-                  <div className="text-6xl mb-4">🌌</div>
-                  <p className="text-lg">Club Photo / Observatory</p>
+                  <Image
+                    src="https://res.cloudinary.com/jniac-just/image/upload/q_auto/f_auto/v1776052019/AstroTalk_pscyk2.jpg"
+                    fill
+                    alt="cover"
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
-        
       </div>
     </div>
   );
